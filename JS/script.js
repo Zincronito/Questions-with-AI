@@ -3,42 +3,42 @@ const MODEL = "gemini-2.0-flash"; // Modelo actualizado a 2.5
 const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`;
 
 const temas = [
-    "concepto de arreglo y operaciones sobre arreglos",
-    "concepto de diccionarios y funciones básicas",
-    "operadores lógicos, aritméticos, de comparación, ternario",
-    "uso de la consola para debuggear",
-    "funciones con parámetros por default"
+    "capitulos de los simpsons",
+    "personajes de los simpsons",
+    "momentos icónicos de los simpsons",
+    "personajes secundarios de los simpsons",
+    "lugares en springfield",
 ];
 
 const temaAleatorio = temas[Math.floor(Math.random() * temas.length)];
 
-const prompt = `En el contexto de JavaScript, CSS y HTML. Genera una pregunta de opción múltiple sobre el siguiente tema ${temaAleatorio}. Proporciona cuatro opciones de respuesta y señala cuál es la correcta.
+const prompt = `En el contexto de la serie los Simpsons. Genera una pregunta de opción múltiple sobre el siguiente tema ${temaAleatorio}. Proporciona cuatro opciones de respuesta y señala cuál es la correcta.
 
 Genera la pregunta y sus posibles respuestas en formato JSON como el siguiente ejemplo, asegurándote de que el resultado SÓLO contenga el objeto JSON y no texto adicional enseguida te doy dos ejemplos:
 
-1. Sobre arreglos en JavaScript:
+1. Sobre personajes en los Simpsons:
 {
-  "question": "¿Cuál de los siguientes métodos agrega un elemento al final de un arreglo en JavaScript?",
+  "question": "¿Cual es el personahe que representa la soledad y la obsesion por los felinos, con una hisotira tragica detras de su comportamiento excentrico en lso simpsons?",
   "options": [
-    "a) shift()",
-    "b) pop()",
-    "c) push()",
-    "d) unshift()"
+    "a) Homer Simpson",
+    "b) Ned Flanders",
+    "c) la loca de los gatos",
+    "d) lisa Simpson"
   ],
-  "correct_answer": "c) push()",
-  "explanation": "El método push() agrega uno o más elementos al final de un arreglo y devuelve la nueva longitud del arreglo."
+  "correct_answer": "c) la loca de los gatos",
+  "explanation": "El personaje es conocdido por su comportamiento erratico y su amor desmesurado por los gatos, a menudo arrojandolos a las personas que se le acercan."
 }
-2. Sobre eventos en JavaScript:
+2. Sobre capitulos en Los Simpsons:
 {
-  "question": "¿Cuál de los siguientes eventos se dispara cuando un usuario hace clic en un elemento HTML?",
+  "question": "En que capitulo de los simpsons se parodia la pelicula 'El Exorcista' con la historia de una niña poseida por un demonio?",
   "options": [
-    "a) onmouseover",
-    "b) onclick",
-    "c) onload",
-    "d) onsubmit"
+    "a) Un estofado de miedo III",
+    "b) Treehouse of Horror XXVIII",
+    "c) Planeta de los simios",
+    "d) Pasado furioso"
   ],
-  "correct_answer": "b) onclick",
-  "explanation": "El evento 'onclick' se dispara cuando un usuario hace clic en un elemento HTML, permitiendo ejecutar funciones en respuesta a ese clic."
+  "correct_answer": "b) Un estofado de miedo XXVIII",
+  "explanation": "En este episodio se ve el exorcismo de la niña."
 }
 `;
 
