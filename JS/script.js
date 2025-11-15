@@ -10,37 +10,9 @@ const temas = [
     "lugares en springfield",
 ];
 
-const temaAleatorio = temas[Math.floor(Math.random() * temas.length)];
-
-const prompt = `En el contexto de la serie los Simpsons. Genera una pregunta de opción múltiple sobre el siguiente tema ${temaAleatorio}. Proporciona cuatro opciones de respuesta y señala cuál es la correcta.
-
-Genera la pregunta y sus posibles respuestas en formato JSON como el siguiente ejemplo, asegurándote de que el resultado SÓLO contenga el objeto JSON y no texto adicional enseguida te doy dos ejemplos:
-
-1. Sobre personajes en los Simpsons:
-{
-  "question": "¿Cual es el personahe que representa la soledad y la obsesion por los felinos, con una hisotira tragica detras de su comportamiento excentrico en lso simpsons?",
-  "options": [
-    "a) Homer Simpson",
-    "b) Ned Flanders",
-    "c) la loca de los gatos",
-    "d) lisa Simpson"
-  ],
-  "correct_answer": "c) la loca de los gatos",
-  "explanation": "El personaje es conocdido por su comportamiento erratico y su amor desmesurado por los gatos, a menudo arrojandolos a las personas que se le acercan."
-}
-2. Sobre capitulos en Los Simpsons:
-{
-  "question": "En que capitulo de los simpsons se parodia la pelicula 'El Exorcista' con la historia de una niña poseida por un demonio?",
-  "options": [
-    "a) Un estofado de miedo III",
-    "b) Treehouse of Horror XXVIII",
-    "c) Planeta de los simios",
-    "d) Pasado furioso"
-  ],
-  "correct_answer": "b) Un estofado de miedo XXVIII",
-  "explanation": "En este episodio se ve el exorcismo de la niña."
-}
-`;
+// *******************************************************************
+// *** ELIMINAMOS PROMPT Y TEMA ALEATORIO DE AQUÍ (ZONA GLOBAL) ***
+// *******************************************************************
 
 let preguntaActual = null;
 let respuestaSeleccionada = false; 
@@ -81,6 +53,42 @@ function desplegarContadores() {
 
 async function respuestaAPI() {
     try {
+        // ***************************************************************
+        // *** MOVEMOS LA LÓGICA AQUÍ PARA QUE SE EJECUTE CADA VEZ ***
+
+        const temaAleatorio = temas[Math.floor(Math.random() * temas.length)];
+
+        const prompt = `En el contexto de la serie los Simpsons. Genera una pregunta de opción múltiple sobre el siguiente tema ${temaAleatorio}. Proporciona cuatro opciones de respuesta y señala cuál es la correcta.
+
+Genera la pregunta y sus posibles respuestas en formato JSON como el siguiente ejemplo, asegurándote de que el resultado SÓLO contenga el objeto JSON y no texto adicional enseguida te doy dos ejemplos:
+
+1. Sobre personajes en los Simpsons:
+{
+  "question": "¿Cual es el personahe que representa la soledad y la obsesion por los felinos, con una hisotira tragica detras de su comportamiento excentrico en lso simpsons?",
+  "options": [
+    "a) Homer Simpson",
+    "b) Ned Flanders",
+    "c) la loca de los gatos",
+    "d) lisa Simpson"
+  ],
+  "correct_answer": "c) la loca de los gatos",
+  "explanation": "El personaje es conocdido por su comportamiento erratico y su amor desmesurado por los gatos, a menudo arrojandolos a las personas que se le acercan."
+}
+2. Sobre capitulos en Los Simpsons:
+{
+  "question": "En que capitulo de los simpsons se parodia la pelicula 'El Exorcista' con la historia de una niña poseida por un demonio?",
+  "options": [
+    "a) Un estofado de miedo III",
+    "b) Treehouse of Horror XXVIII",
+    "c) Planeta de los simios",
+    "d) Pasado furioso"
+  ],
+  "correct_answer": "b) Un estofado de miedo XXVIII",
+  "explanation": "En este episodio se ve el exorcismo de la niña."
+}
+`;
+        // ***************************************************************
+        
         const response = await fetch(
             url,
             {
@@ -88,7 +96,7 @@ async function respuestaAPI() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     contents: [{
-                        parts: [{ text: prompt }]
+                        parts: [{ text: prompt }] // Usamos el nuevo prompt
                     }],
                     generationConfig: {
                         temperature: 0.25,
@@ -180,6 +188,8 @@ function verificarRespuesta(selectedButton, selectedOptionText) {
     
    
     setTimeout(() => {
+        // Llama a cargarPregunta, que a su vez llama a respuestaAPI, 
+        // ¡y ahora genera un nuevo prompt!
         cargarPregunta();
     }, 3000);
 }
