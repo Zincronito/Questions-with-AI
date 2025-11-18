@@ -53,8 +53,7 @@ function desplegarContadores() {
 
 async function respuestaAPI() {
     try {
-        // ***************************************************************
-        // *** MOVEMOS LA LÓGICA AQUÍ PARA QUE SE EJECUTE CADA VEZ ***
+    
 
         const temaAleatorio = temas[Math.floor(Math.random() * temas.length)];
 
